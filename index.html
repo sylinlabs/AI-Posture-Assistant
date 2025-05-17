@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Posture Assistant</title>
+  <link rel="shortcut icon" href="logo_512x512.png" type="image/x-icon">
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: 'Inter', sans-serif; display: flex; flex-direction: column; background: #fafafa; color: #333333; }
+    #page { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; }
+
+    /* Header */
+    header { background: #ffffff; padding: 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 40px; margin-right: 10px; }
+    .logo span { font-size: 1.4rem; font-weight: bold; color: #222222; }
+    nav { display: flex; gap: 16px; }
+    nav a { font-size: 0.95rem; color: #555555; text-decoration: none; }
+    nav a:hover { color: #7e5bef; }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-switch button { padding: 6px 10px; border: none; background: #7e5bef; color: #ffffff; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+    .lang-switch button.active { background: #2dc4f9; }
+
+    /* Hero */
+    .hero { padding: 100px 20px; text-align: center; background: linear-gradient(90deg, #7e5bef, #2dc4f9); }
+    .hero h1 { font-size: 2.8rem; color: #ffffff; margin-bottom: 16px; }
+    .hero p { font-size: 1.2rem; color: #f0f0f0; margin-bottom: 24px; }
+    .hero button { padding: 12px 24px; font-size: 1rem; background: #4ecca3; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; }
+    .hero button:hover { opacity: 0.9; }
+
+    /* Features Highlight */
+    .features { padding: 60px 20px; background: #ffffff; }
+    .features h2 { text-align: center; font-size: 2rem; color: #222222; margin-bottom: 32px; }
+    .feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+    .feature-card { background: #7e5bef; padding: 24px; border-radius: 12px; color: #ffffff; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .feature-card:hover { transform: translateY(-5px); }
+    .feature-card h3 { margin-bottom: 12px; font-size: 1.4rem; }
+    .feature-card p { font-size: 1rem; line-height: 1.4; }
+
+    /* Showcase Images */
+    .showcase { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 20px; padding: 40px 20px; max-width: 1000px; margin: 0 auto; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .showcase img { width: 100%; border-radius: 8px; }
+
+    /* Details */
+    .detail { padding: 60px 20px; max-width: 800px; margin: 40px auto; background: #ffffff; color: #333333; line-height: 1.6; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .detail h2 { font-size: 1.8rem; color: #2dc4f9; text-align: center; margin-bottom: 24px; }
+    .detail p { margin-bottom: 16px; }
+
+    /* Install */
+    .install { padding: 60px 20px; max-width: 800px; margin: 40px auto; background: #ffffff; color: #333333; line-height: 1.6; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .install h2 { font-size: 1.6rem; margin-bottom: 16px; color: #2dc4f9; text-align: center; }
+    .install ol { list-style: decimal inside; margin-left: 20px; color: #333333; }
+
+    /* Footer */
+    footer { background: #f0f0f0; color: #666666; padding: 20px; text-align: center; }
+    footer a { color: #7e5bef; text-decoration: none; }
+    footer p { margin: 6px 0; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div id="page">
+    <header>
+      <div class="logo">
+        <img src="logo_512x512.png" alt="Logo">
+        <span data-i18n="title">AI 坐姿矫正助手</span>
+      </div>
+      <nav>
+        <a href="#hero" data-i18n="nav.home">首页</a>
+        <a href="#features" data-i18n="nav.features">特性</a>
+        <a href="#detail" data-i18n="nav.detail">详情</a>
+        <a href="#install" data-i18n="nav.install">安装</a>
+        <a href="https://github.com/你的仓库" target="_blank">GitHub</a>
+      </nav>
+      <div class="lang-switch">
+        <button data-lang="zh" class="active">中</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="de">DE</button>
+      </div>
+    </header>
+    <main>
+      <section id="hero" class="hero">
+        <h1 data-i18n="hero.title">AI 坐姿矫正助手</h1>
+        <p data-i18n="hero.subtitle">本地 AI 实时监测颈肩姿势，低头超阈值即语音/桌面温馨提醒。</p>
+        <button onclick="window.open('https://chrome.google.com/webstore/detail/你的插件ID', '_blank')" data-i18n="hero.button">立即体验</button>
+      </section>
+
+      <section id="features" class="features">
+        <h2 data-i18n="features.title">主要特性与功能</h2>
+        <div class="feature-list">
+          <div class="feature-card">
+            <h3 data-i18n="features.f1.title">可调阈值 & 触发时长</h3>
+            <p data-i18n="features.f1.desc">自定义“弯曲阈值”(0–90°)与“连续时长”(1–10s)，满足个性化姿势管理。</p>
+          </div>
+          <div class="feature-card">
+            <h3 data-i18n="features.f2.title">平滑滤波 & 模框 self-adaptive</h3>
+            <p data-i18n="features.f2.desc">指数滤波平滑检测曲线，FPS 低时切换轻量模型，流畅稳定。</p>
+          </div>
+          <div class="feature-card">
+            <h3 data-i18n="features.f3.title">闹钟 & 倒计时</h3>
+            <p data-i18n="features.f3.desc">内置闹钟、倒计时、捐赠与反馈链接，一站式健康提醒。</p>
+          </div>
+          <div class="feature-card">
+            <h3 data-i18n="features.f4.title">全本地 & 隐私保护</h3>
+            <p data-i18n="features.f4.desc">所有运算本地执行，无图像或数据上传，严格GDPR友好。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="showcase">
+        <img src="1.png" alt="实时姿势监测">
+        <img src="2.png" alt="参数设置界面">
+        <img src="3.png" alt="闹钟与倒计时">
+      </section>
+
+      <section id="detail" class="detail">
+        <h2 data-i18n="detail.title">产品简介</h2>
+        <p data-i18n="detail.p1">AI 坐姿矫正助手基于MediaPipe PoseLandmarker实时捕捉耳-肩-臀夹角，精准判断坐姿偏差。无论工作、学习或娱乐，只要持续低头超过阈值，系统将立即通过语音或桌面弹窗进行友好提醒，助您时刻保持正确坐姿。</p>
+        <p data-i18n="detail.p2">在设置面板中，您可以自由调整“弯曲阈值”（0°–90°）与“触发时长”（1s–10s），让提醒更贴合您的需求。内置指数滤波算法有效减少误报，检测帧率下降时自动切换轻量级模型，确保插件在各种环境下均表现出色。</p>
+        <p data-i18n="detail.p3">此外，插件还提供闹钟与倒计时工具，方便您安排定时休息与工作节奏。整套功能均在本地运行，不上传任何视频或数据，严格遵循GDPR隐私保护。</p>
+      </section>
+
+      <section id="install" class="install">
+        <h2 data-i18n="install.title">安装指南</h2>
+        <ol>
+          <li data-i18n="install.step1">访问 <a href="https://chrome.google.com/webstore/detail/你的插件ID" target="_blank">Chrome 网上应用店</a>。</li>
+          <li data-i18n="install.step2">点击“添加到 Chrome”并确认安装。</li>
+          <li data-i18n="install.step3">点击浏览器工具栏图标，打开插件设置。</li>
+          <li data-i18n="install.step4">根据个人需求配置提醒阈值与权限。</li>
+        </ol>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 <span data-i18n="footer.author">Sylin Labs</span></p>
+      <p data-i18n="footer.product">Product by Sylin Labs</p>
+      <p><a href="mailto:contact@yourdomain.com">info@sylinlabs.com</a> | <a href="https://github.com/你的仓库" target="_blank">GitHub</a></p>
+    </footer>
+  </div>
+  <script>
+    const i18n = {
+      zh: {
+        title: 'AI 坐姿矫正助手',
+        'nav.home': '首页', 'nav.features': '特性', 'nav.detail': '详情', 'nav.install': '安装',
+        'hero.title': 'AI 坐姿矫正助手', 'hero.subtitle': '本地 AI 实时监测颈肩姿势，低头超阈值即语音/桌面温馨提醒。', 'hero.button': '立即体验',
+        'features.title': '主要特性与功能',
+        'features.f1.title': '可调阈值 & 触发时长', 'features.f1.desc': '自定义“弯曲阈值”(0–90°)与“连续时长”(1–10s)，满足个性化姿势管理。',
+        'features.f2.title': '平滑滤波 & 模型自适应', 'features.f2.desc': '指数滤波平滑检测曲线，FPS 低时切换轻量模型，流畅稳定。',
+        'features.f3.title': '闹钟 & 倒计时', 'features.f3.desc': '内置闹钟、倒计时、捐赠与反馈链接，一站式健康提醒。',
+        'features.f4.title': '全本地 & 隐私保护', 'features.f4.desc': '所有运算本地执行，无图像或数据上传，严格GDPR友好。',
+        'detail.title': '产品简介',
+        'detail.p1': 'AI 坐姿矫正助手基于本地AI计算实时捕捉耳-肩-臀夹角，精准判断坐姿偏差。无论工作、学习或娱乐，只要持续低头超过阈值，系统将立即通过语音或桌面弹窗进行友好提醒，助您时刻保持正确坐姿。',
+        'detail.p2': '在设置面板中，您可以自由调整“弯曲阈值”（0°–90°）与“触发时长”（1s–10s），让提醒更贴合您的需求。内置指数滤波算法有效减少误报，检测帧率下降时自动切换轻量级模型，确保插件在各种环境下均表现出色。',
+        'detail.p3': '此外，插件还提供闹钟与倒计时工具，方便您安排定时休息与工作节奏。整套功能均在本地运行，不上传任何视频或数据，严格遵循GDPR隐私保护。',
+        'install.title': '安装指南',
+        'install.step1': '访问 <a href="https://chrome.google.com/webstore/detail/你的插件ID" target="_blank">Chrome Web Store</a>.', 
+        'install.step2': '点击“添加到 Chrome”并确认安装。', 'install.step3': '点击浏览器工具栏图标，打开插件设置。', 'install.step4': '根据个人需求配置提醒阈值与权限。',
+        'footer.author': 'Sylin Labs', 'footer.product': 'Product by Sylin Labs'
+      },
+      en: {
+        title: 'AI Posture Assistant',
+        'nav.home': 'Home', 'nav.features': 'Features', 'nav.detail': 'Details', 'nav.install': 'Install',
+        'hero.title': 'AI Posture Assistant', 'hero.subtitle': 'Local AI monitors your neck & shoulder posture in real time, with voice/desktop alerts when threshold is exceeded.', 'hero.button': 'Get Started',
+        'features.title': 'Key Features',
+        'features.f1.title': 'Custom Threshold & Duration', 'features.f1.desc': 'Set bend threshold (0–90°) and duration (1–10s) to suit your needs.',
+        'features.f2.title': 'Smooth Filtering & Adaptive Model', 'features.f2.desc': 'Exponential filter smooths data; switches to light model at low FPS for stability.',
+        'features.f3.title': 'Alarm & Countdown', 'features.f3.desc': 'Built-in alarm, countdown, donation & feedback links for all-in-one health reminders.',
+        'features.f4.title': 'Fully Local & Privacy-Friendly', 'features.f4.desc': 'All processing stays local, no data uploaded, GDPR compliant.',
+        'detail.title': 'Product Overview',
+        'detail.p1': 'Built on local Ai Resource, it tracks the ear-shoulder-hip angle to detect posture deviation. Receive instant voice or desktop alerts when you slouch.',
+        'detail.p2': 'Adjust bend threshold (0°–90°) and trigger duration (1s–10s) in settings. Exponential filtering reduces false alerts, and light model kicks in under low FPS.',
+        'detail.p3': 'Includes alarms and countdown timers for scheduled breaks. Entirely local execution ensures zero data transmission and full GDPR compliance.',
+        'install.title': 'How to Install',
+        'install.step1': 'Go to the <a href="https://chrome.google.com/webstore/detail/你的插件ID" target="_blank">Chrome Web Store</a>.',
+        'install.step2': 'Click "Add to Chrome" and confirm.', 'install.step3': 'Open the extension settings from the toolbar icon.', 'install.step4': 'Configure thresholds and permissions as desired.',
+        'footer.author': 'Sylin Labs', 'footer.product': 'Product by Sylin Labs'
+      },
+      de: {
+        title: 'KI Sitzhaltung Assistent',
+        'nav.home': 'Startseite', 'nav.features': 'Funktionen', 'nav.detail': 'Details', 'nav.install': 'Installieren',
+        'hero.title': 'KI Sitzhaltung Assistent', 'hero.subtitle': 'Lokale KI überwacht Ihre Nacken- & Schulterhaltung in Echtzeit, mit Sprach-/Desktop-Warnungen bei Überschreitung.', 'hero.button': 'Los geht’s',
+        'features.title': 'Hauptfunktionen',
+        'features.f1.title': 'Schwellwert & Dauer anpassen', 'features.f1.desc': 'Stellen Sie Biegungsschwelle (0–90°) und Dauer (1–10s) nach Ihren Bedürfnissen ein.',
+        'features.f2.title': 'Glättung & adaptives Modell', 'features.f2.desc': 'Exponentieller Filter glättet Daten; wechselt bei niedriger FPS zu leichtem Modell für Stabilität.',
+        'features.f3.title': 'Wecker & Countdown', 'features.f3.desc': 'Eingebauter Wecker, Countdown, Spenden- & Feedbacklinks für umfassende Gesundheits-Erinnerungen.',
+        'features.f4.title': 'Vollständig lokal & datenschutzfreundlich', 'features.f4.desc': 'Alle Prozesse bleiben lokal, keine Datenübertragung, GDPR-konform.',
+        'detail.title': 'Produktübersicht',
+        'detail.p1': 'Basierend auf lokal KI-Ressource, verfolgt es den Ohr-Schulter-Hüfte-Winkel zur Erkennung von Haltungabweichungen. Erhalten Sie sofort Sprach- oder Desktop-Warnungen bei schlechter Haltung.',
+        'detail.p2': 'Passen Sie Biegungsschwelle (0°–90°) und Auslösezeit (1s–10s) in den Einstellungen an. Exponentielle Glättung reduziert Fehlalarme, und ein leichtes Modell wird bei niedriger FPS aktiviert.',
+        'detail.p3': 'Enthält Wecker und Countdown-Timer für geplante Pausen. Vollständig lokal Ausführung stellt Null-Datenübertragung und volle GDPR-Konformität sicher.',
+        'install.title': 'Installation',
+        'install.step1': 'Gehen Sie zum <a href="https://chrome.google.com/webstore/detail/你的插件ID" target="_blank">Chrome Web Store</a>.',
+        'install.step2': 'Klicken Sie auf "Zu Chrome hinzufügen" und bestätigen Sie.', 'install.step3': 'Öffnen Sie die Erweiterungseinstellungen über das Symbol in der Toolbar.', 'install.step4': 'Konfigurieren Sie Schwellenwerte und Berechtigungen nach Wunsch.',
+        'footer.author': 'Sylin Labs', 'footer.product': 'Product by Sylin Labs'
+      }
+    };
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+      });
+      document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-lang') === lang));
+    }
+    // 初始化
+    setLang('zh');
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+    });
+  </script>
+</body>
+</html>
